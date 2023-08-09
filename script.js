@@ -1,3 +1,4 @@
+"use strict";
 const add = document.querySelector("#add_todo");
 const update = document.querySelector("#update");
 const todoList = document.querySelector("#list");
@@ -12,7 +13,6 @@ const alltask = document.querySelector("#status>div>span:nth-child(1)");
 const progressBar = document.querySelector("#status>div:nth-child(2)>div");
 const completedTask = document.querySelector("#status>div>span:nth-child(2)");
 const unCompletedTask = document.querySelector("#status>div>span:nth-child(3)");
-"use strict";
 let tasks = [];
 let taskID = 0;
 let tasksLen = 0;
@@ -23,7 +23,7 @@ add.addEventListener("click", (e) => limitTask(JSON.parse(localStorage.getItem('
 todo.addEventListener("keypress", (e) => e.keyCode === 13 && limitTask(JSON.parse(localStorage.getItem('tasks'))) < 100 && addToDo(e, false));
 
 window.addEventListener("load", () => {
-    tasks = JSON.parse(localStorage.getItem('tasks'));
+    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks && tasks.length>0 && tasks.map(task =>
         createElement(task)
     )
@@ -177,8 +177,8 @@ function getDay() {
 }
 
 function status(tasks) {
-    const allTasks = tasks.length;
-    const completed = tasks.filter(task => {
+    const allTasks = tasks && tasks.length;
+    const completed = tasks && tasks.filter(task => {
         return task.completed
     }).length;
     const uncompleted = allTasks - completed;
@@ -197,7 +197,7 @@ function check() {
 function limitTask(tasks) {
     if (tasks && tasks.length) {
         let tasksLen = tasks.length;
-        tasksPersent = tasksLen * 10;
+        let tasksPersent = tasksLen * 10;
         return tasksLen <= 10 ? tasksPersent : false
     }
     return true
