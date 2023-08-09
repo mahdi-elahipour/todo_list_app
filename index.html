@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>ToDo App</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="status">
+            <div>
+                <span>alltasks</span>
+                <span>completed</span>
+                <span>uncompleted</span>
+            </div>
+            <div>
+                <div></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="tooltip"><span id="messageblock">X</span>جهت ویرایش وظیفه روی عنوان وظیفه کلیک نمایید</div>
+            <div id="update" class="hideElement">
+                <input type="text" id="txt_update">
+                <button id="update_btn">بروزرسانــی</button>
+                <button id="cancel_update">لغو</button>
+            </div>
+            <div class="add_todo">
+                <input type="text" dir="rtl" id="add_text" placeholder="وظیفه..." />
+                <button id="add_todo">افزودن</button>
+            </div>
+            <div class="todo_list">
+                <ul id="list">
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+
+</html>
