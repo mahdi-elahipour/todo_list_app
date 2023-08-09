@@ -12,19 +12,19 @@ const alltask = document.querySelector("#status>div>span:nth-child(1)");
 const progressBar = document.querySelector("#status>div:nth-child(2)>div");
 const completedTask = document.querySelector("#status>div>span:nth-child(2)");
 const unCompletedTask = document.querySelector("#status>div>span:nth-child(3)");
-
+"use strict";
 let tasks = [];
 let taskID = 0;
 let tasksLen = 0;
 const days = ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج شنبه', 'جمعه', 'شنبه'];
 const colors = ['lightseagreen', 'lightblue', 'lightgreen', 'lightyellow', 'lightcoral', 'lightsalmon'];
 
-add.addEventListener("click", (e) => { limitTask(JSON.parse(localStorage.getItem('tasks'))) < 100 && addToDo(e, true) });
+add.addEventListener("click", (e) => limitTask(JSON.parse(localStorage.getItem('tasks'))) < 100 && addToDo(e, true) );
 todo.addEventListener("keypress", (e) => e.keyCode === 13 && limitTask(JSON.parse(localStorage.getItem('tasks'))) < 100 && addToDo(e, false));
 
 window.addEventListener("load", () => {
     tasks = JSON.parse(localStorage.getItem('tasks'));
-    tasks.map(task =>
+    tasks && tasks.length>0 && tasks.map(task =>
         createElement(task)
     )
     check();
