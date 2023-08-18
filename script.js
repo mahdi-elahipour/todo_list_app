@@ -17,14 +17,13 @@ let tasks = [];
 let taskID = 0;
 let tasksLen = 0;
 const days = ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج شنبه', 'جمعه', 'شنبه'];
-const colors = ['lightseagreen', 'lightblue', 'lightgreen', 'lightyellow', 'lightcoral', 'lightsalmon'];
 
-add.addEventListener("click", (e) => limitTask(JSON.parse(localStorage.getItem('tasks'))) < 100 && addToDo(e, true) );
+add.addEventListener("click", (e) => limitTask(JSON.parse(localStorage.getItem('tasks'))) < 100 && addToDo(e, true));
 todo.addEventListener("keypress", (e) => e.keyCode === 13 && limitTask(JSON.parse(localStorage.getItem('tasks'))) < 100 && addToDo(e, false));
 
 window.addEventListener("load", () => {
     tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks && tasks.length>0 && tasks.map(task =>
+    tasks && tasks.length > 0 && tasks.map(task =>
         createElement(task)
     )
     check();
@@ -49,8 +48,11 @@ function addToDo(e, nokeypress = true) {
         timeStamp: getDay()
     }
 
-    const colorIndex = Math.floor(Math.random() * 6);
-    task.color = colors[colorIndex]
+    let red = Math.floor(Math.random() * 255);
+    let green = Math.floor(Math.random() * 255);
+    let blue = Math.floor(Math.random() * 255);
+
+    task.color = `rgb(${red},${green},${blue})`
     tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     createElement(task);
@@ -82,7 +84,7 @@ function createElement(task) {
     const list = document.createElement(`li`);
     task.completed && list.classList.add('completed')
     list.classList.add('listItem')
-    list.classList.add(task.color)
+    list.style.background=task.color;
     list.innerHTML = `
     <span class=timeStamp>${task.timeStamp}</span>
     <span class=task>${task.todo}</span>
